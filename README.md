@@ -10,4 +10,5 @@ See vars.env for configuration, then run `bash run.sh`.
 
 | cpu					| disk					| ram	| net			| OS		| notes						| load time	| tps		|
 |---					|---					|---	|---			|---		|---						|---		|---		|
-| AMD Opteron(tm) Processor 6262 HE	| 4 3-disk raidz, 7200rpm 1TB each	| 8gb	| 2 1000BASE-T lacp	| FreeBSD 12.1	| compression=lz4,atime=off,recordsize=128k	| 91m5.090s	| 73.196155	|
+| AMD Opteron(tm) Processor 6262 HE	| 12 7200rpm 1TB, raidz10 groups of 3	| 8gb	| 2 1000BASE-T lacp	| FreeBSD 12.1	| compression=lz4,atime=off,recordsize=128k	| 91m5.090s	| 73.196155	|
+| AMD Opteron(tm) Processor 6262 HE	| 12 7200rpm 1TB, raidz10 groups of 3	| 8gb	| 2 1000BASE-T lacp	| FreeBSD 12.1	| compression=off,atime=off,recordsize=128k	| 114m2.774s	| 54.447264	|
