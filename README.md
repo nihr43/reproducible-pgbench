@@ -6,9 +6,19 @@ We use terraform to deploy a new database within a postgres installation, run `p
 
 See vars.env for configuration, then run `bash run.sh`.
 
+Postgres is `postgresql12-server` as provided by pkg in FreeBSD.
+Test and client system are connected to the same physical PHY on a procurve 1800-24g unless noted.
+
+`-s 10000` was chosen as this is about 1 billion rows.
+`-c 16` was chosen as this was where the curve just started to flatten out on the initial test system, with regard to the effect of client count on tps.
+
+The first few "default parameters" tests were intentionally repeated to validate consistency in the test method.
+
 ## results
 
-| cpu					| disk					| ram	| net			| OS		| notes						| load time	| tps		|
-|---					|---					|---	|---			|---		|---						|---		|---		|
-| AMD Opteron(tm) Processor 6262 HE	| 12 7200rpm 1TB, raidz10 groups of 3	| 8gb	| 2 1000BASE-T lacp	| FreeBSD 12.1	| compression=lz4,atime=off,recordsize=128k	| 91m5.090s	| 73.196155	|
-| AMD Opteron(tm) Processor 6262 HE	| 12 7200rpm 1TB, raidz10 groups of 3	| 8gb	| 2 1000BASE-T lacp	| FreeBSD 12.1	| compression=off,atime=off,recordsize=128k	| 114m2.774s	| 54.447264	|
+| cpu					| disk					| ram	| net				| OS		| zfs parameters				| compress ratio	| load time	| latency	| tps		|
+|---					|---					|---	|---				|---		|---						|---			|---		|---		|---		|
+| Intel(R) Atom(TM) CPU D525		| this is the test client		| 8gb	| 2 1000BASE-T lacp mtu 9000	| Alpine 3.12	|						|			|		|		|		|
+| AMD Opteron(tm) Processor 6262 HE     | 12 7200rpm 1TB, raidz10 vdevs of 3    | 8gb   | 2 1000BASE-T lacp mtu 9000    | FreeBSD 12.1  |						|			| 120m39.281s	| 157.043 ms	| 101.883033	|
+| AMD Opteron(tm) Processor 6262 HE     | 12 7200rpm 1TB, raidz10 vdevs of 3    | 8gb   | 2 1000BASE-T lacp mtu 9000    | FreeBSD 12.1  |                                               |			|               |               |		|
+| AMD Opteron(tm) Processor 6262 HE     | 12 7200rpm 1TB, raidz10 vdevs of 3    | 8gb   | 2 1000BASE-T lacp mtu 9000    | FreeBSD 12.1  |                                               |           		|               |               |		|
