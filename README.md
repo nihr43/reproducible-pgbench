@@ -92,7 +92,7 @@ _I would be thrilled to get so much free space and memory on the servers I use a
 
 ### slog
 
-Second to compression, an array of SLOG devices is essential for a database workload.
+Second to compression, an array of SLOG devices is essential for a database workload.  Comparing 16 and 18, the tps improvement was 180% and latency 56%.
 
 ```
                capacity     operations    bandwidth
@@ -164,7 +164,7 @@ As seen in test 17, we see a moderate perfomance increase over the base case (16
 
 Test 25 shows that an l2arc was worth more than 100tps over comparable test 21 - both being under the same memory limitations.
 
-Fitting the entire dataset into memory makes other tests less meaningful, so from here on I began putting hard limits on memory consumption.
+Fitting the entire dataset into memory makes other tests less meaningful, so from here on I began putting consistent limits on memory consumption.
 
 ### postgres memory vs filesystem memory
 
